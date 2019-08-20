@@ -56,6 +56,12 @@
         </dependency>
         <dependency>
             <groupId>com.massivecraft</groupId>
+            <artifactId>Factions-Legacy</artifactId>
+            <version>1.6.9.5-U0.4.3</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.massivecraft</groupId>
             <artifactId>Factions</artifactId>
             <version>1.6.9.5-U0.4.9</version>
             <scope>provided</scope>

@@ -89,7 +89,8 @@ import com.griefcraft.modules.modes.NoSpamModule;
 import com.griefcraft.modules.modes.PersistModule;
 import com.griefcraft.modules.modify.ModifyModule;
 import com.griefcraft.modules.owners.OwnersModule;
-import com.griefcraft.modules.pluginsupport.Factions;
+import com.griefcraft.modules.pluginsupport.factions.Factions;
+import com.griefcraft.modules.pluginsupport.factions.FactionsLegacy;
 import com.griefcraft.modules.pluginsupport.Towny;
 import com.griefcraft.modules.pluginsupport.WorldGuard;
 import com.griefcraft.modules.redstone.RedstoneModule;
@@ -1784,7 +1785,14 @@ public class LWC {
 
         if (resolvePlugin("Factions") != null) {
             try {
-                registerModule(new Factions());
+                Plugin factions = instance.getPlugin().getServer().getPluginManager().getPlugin("Factions");
+                String version = factions.getDescription().getVersion().replaceAll("[^\\d]", "");
+
+                if (version.compareTo("1695049") >= 0) {
+                    registerModule(new Factions());
+                } else {
+                    registerModule(new FactionsLegacy());
+                }
             } catch (NoClassDefFoundError e) {
                 this.log("Failed to hook into Factions! (Is it up to date?)");
                 e.printStackTrace();
